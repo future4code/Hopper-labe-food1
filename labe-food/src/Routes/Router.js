@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import AddressPage from '../Pages/AddressPage'
 import CarrinhoPage from '../Pages/CarrinhoPage'
 import HomePage from '../Pages/HomePage'
@@ -10,7 +10,7 @@ import SignupPage from '../Pages/SignupPage'
 
 const Router = () => {
   return (
-    // <BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route path={'/'} element={<LoginPage />} />
         <Route path={'/cadastro-usuario'} element={<SignupPage />} />
@@ -23,7 +23,7 @@ const Router = () => {
         <Route path={'/carrinho'} element={<CarrinhoPage />} />
         <Route path={'/perfil'} element={<ProfilePage />} />
       </Routes>
-    // </BrowserRouter>
+    </BrowserRouter>
   )
 }
 
