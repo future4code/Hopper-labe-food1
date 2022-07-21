@@ -22,6 +22,10 @@ const LoginPage = () => {
           id="outlined-required"
           label="E-mail"
           placeholder="email@email.com"
+          // (InputLabelProps)Abaixo para deixar label fixo
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <TextField
           fullWidth
@@ -32,6 +36,10 @@ const LoginPage = () => {
           label="Senha"
           placeholder="Senha"
           type="password"
+          // (InputLabelProps)Abaixo para deixar label fixo
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </div>
       <div>
