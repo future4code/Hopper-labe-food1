@@ -19,7 +19,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 🤝 Colaboradores
 - Alison Lucas Ribeiro
-- Amanda Viana Farjado
+- Amanda Viana Fajardo
 - Camila Donda Pereira
 - Mariana Abdias Gonçalves
 - Rafael Santos Beserra
