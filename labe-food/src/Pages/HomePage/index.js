@@ -1,9 +1,9 @@
 import React from 'react'
-import CardRestaurant from '../../Components/CardRestaurant.js'
+import CardRestaurant from '../../components/CardRestaurant.js'
 import { useNavigate } from 'react-router-dom'
-import Search from '../../Components/Search.js'
-import Footer from '../../Components/Footer.js'
-import Carousel from '../../Components/Carousel.js'
+import Search from '../../components/Search.js'
+import Footer from '../../components/Footer.js'
+import Carousel from '../../components/Carousel.js'
 
 const HomePage = () => {
   const navigate = useNavigate()

@@ -2,14 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { LoginBox } from "./styled";
-import Logo from "../../assets/logo-laranja.svg";
+import { goToSignUp } from "../../Routes/coordinator";
+// import Logo from "../../assets/logo-laranja.svg";
 
 const AddressPage = () => {
   const navigate = useNavigate();
   return (
     <LoginBox>
-      <p onClick={() => navigate("/")}>←</p>
+      <p onClick={() => goToSignUp (navigate)}><ArrowBackIosIcon fontSize="large"/></p>
       <p>Meu Endereço</p>
       <div>
         <TextField
