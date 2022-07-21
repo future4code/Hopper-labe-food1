@@ -6,7 +6,8 @@ import HomePage from '../Pages/HomePage'
 import LoginPage from '../Pages/LoginPage'
 import ProfilePage from '../Pages/ProfilePage'
 import RestaurantsDetailsPage from '../Pages/RestaurantsDetailsPage'
-import SignUpPage from '../Pages/SignUpPage'
+import SignUpPage from '../Pages/SignupPage'
+import SearchPage from '../Pages/SearchPage'
 
 const Router = () => {
   return (
@@ -16,10 +17,8 @@ const Router = () => {
         <Route path={'/cadastro-usuario'} element={<SignUpPage />} />
         <Route path={'/cadastro-endereco'} element={<AddressPage />} />
         <Route path={'/home'} element={<HomePage />} />
-        <Route
-          path={'/restaurante/:id'}
-          element={<RestaurantsDetailsPage />}
-        />
+        <Route path={'/busca'} element={<SearchPage />} />
+        <Route path={'/restaurante/:id'} element={<RestaurantsDetailsPage />} />
         <Route path={'/carrinho'} element={<CarrinhoPage />} />
         <Route path={'/perfil'} element={<ProfilePage />} />
       </Routes>

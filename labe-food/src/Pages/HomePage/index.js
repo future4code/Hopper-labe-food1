@@ -1,9 +1,14 @@
 import React from 'react'
-import CardRestaurant from '../../components/CardRestaurant.js'
+import CardRestaurant from '../../Components/CardRestaurant.js'
 import { useNavigate } from 'react-router-dom'
-import Search from '../../components/Search.js'
-import Footer from '../../components/Footer.js'
-import Carousel from '../../components/Carousel.js'
+import Search from '../../Components/Search.js'
+import Footer from '../../Components/Footer.js'
+import Carousel from '../../Components/Carousel.js'
+import {
+  goToLoginPage,
+  goToRestaurant,
+  goToSearch
+} from '../../Routes/coordinator.js'
 
 const HomePage = () => {
   const navigate = useNavigate()
@@ -12,8 +17,9 @@ const HomePage = () => {
       <br />
       <Search />
       <br />
-      <button onClick={() => navigate('/restaurante')}>Restaurante</button>
-      <button onClick={() => navigate('/')}>Voltar Login</button>
+      <button onClick={() => goToRestaurant(navigate)}>Restaurante</button>
+      <button onClick={() => goToLoginPage(navigate)}>Voltar Login</button>
+      <button onClick={() => goToSearch(navigate)}>Buscar</button>
       <br />
       <Carousel />
       <br />
