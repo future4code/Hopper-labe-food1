@@ -1,19 +1,77 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
 import TextField from "@mui/material/TextField";
-import { LoginBox } from "./styled";
+import { CircularProgress } from "@mui/material";
+import { SignUpPageContainer, InputsContainer } from "./styled";
 import Logo from "../../assets/logo-laranja.svg";
+import {  goToLoginPage } from './../../Routes/coordinator';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import useForm from './../../hooks/useForm';
+import { signUp } from "../../services/user";
 
-const SignupPage = () => {
+
+
+const SignUpPage = () => {
+  
   const navigate = useNavigate();
+  const [form, setForm, onChange, clear] =useForm({ name: "",
+  email: "",
+  cpf: "",
+  password: "",
+  showPassword: false,
+  showConfirm: false,}) 
+  const [confirm, setConfirm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  
+//ocultar senha e confirmação de senha e prevenir comportamento padrão seguindo o mui-material//
+  const handleClickShowPassword = () => {
+setForm({...form, showPassword: !form.showPassword})
+  }
+
+  const handleMouseDownPassword = (event) =>{
+    event.preventDefault();
+  }
+
+  const handleClickShowConfirm  = () => {
+    setForm({...form, showConfirm: !form.showConfirm})
+  }
+
+  const handleMouseDownConfirm = (event) => {
+    event.preventDefault();
+  }
+ const onSubmitForm = (event) => {
+  event.preventDefault();
+  if (form.password !== confirm){
+    alert("As senhas não coincidem");
+
+  }else {
+    signUp(form, navigate, setIsLoading, clear)
+  }
+ }
+
+ const handleConfirm = (event) => {
+  setConfirm(event.target.value);
+};
+
   return (
-    <LoginBox>
-      <p onClick={() => navigate("/")}>←</p>
+        <form onSubmit={onSubmitForm}>
+    <SignUpPageContainer>
+      <p onClick={() => goToLoginPage(navigate)}><ArrowBackIosIcon fontSize="large"/></p>
       <img src={Logo} alt="Logo" />
       <p>Entrar</p>
-      <div>
+     
+      <InputsContainer>
         <TextField
+         value={form.name}
+         name={'name'}
+         onChange={onChange}
           fullWidth
           margin={"normal"}
           required
@@ -26,6 +84,9 @@ const SignupPage = () => {
           }}
         />
         <TextField
+          value={form.email}
+          name={'email'}
+          onChange={onChange}
           fullWidth
           autoFocus
           margin={"normal"}
@@ -39,6 +100,9 @@ const SignupPage = () => {
           }}
         />
         <TextField
+         name={"cpf"}
+         value={form.cpf}
+         onChange={onChange}
           fullWidth
           autoFocus
           margin={"normal"}
@@ -52,7 +116,12 @@ const SignupPage = () => {
             shrink: true,
           }}
         />
-        <TextField
+        <InputLabel>Senha*</InputLabel>
+        <OutlinedInput
+         name="password"
+         type={form.showPassword ? "text" : "password"}
+         value={form.password}
+         onChange={onChange}
           fullWidth
           autoFocus
           margin={"normal"}
@@ -60,13 +129,30 @@ const SignupPage = () => {
           id="senha"
           label="Senha"
           placeholder="Mínimo 6 caracteres"
-          type="password"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                edge="end"
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {form.showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
           // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
+          // InputLabelProps={{
+          //   shrink: true,
+          // }}
         />
-        <TextField
+        
+        <InputLabel>Confirmar*</InputLabel>
+        <OutlinedInput
+           name="confirm-password"
+           type={form.showConfirm ? "text" : "password"}
+           value={form.confirm}
+           onChange={handleConfirm}
           fullWidth
           autoFocus
           margin={"normal"}
@@ -74,27 +160,40 @@ const SignupPage = () => {
           id="confirm"
           label="Confirme"
           placeholder="Confirme a Senha Anterior"
-          type="password"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                edge="end"
+                aria-label="toggle password visibility"
+                onClick={handleClickShowConfirm}
+                onMouseDown={handleMouseDownConfirm}
+              >
+                {form.showConfirm ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          
           // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
+          // InputLabelProps={{
+          //   shrink: true,
+          // }}
         />
-      </div>
-      <div>
+      </InputsContainer>
+    
         <Button
+          
           variant="contained"
           type={"submit"}
           fullWidth
           color={"primary"}
           margin={"normal"}
-          onSubmit={() => navigate("/cadastro-endereco")}
         >
-          Criar
+           {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Criar</>}
         </Button>
-      </div>
-    </LoginBox>
+     
+    </SignUpPageContainer>
+    </form>
   );
 };
 
-export default SignupPage;
+export default SignUpPage

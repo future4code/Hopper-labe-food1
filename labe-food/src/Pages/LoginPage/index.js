@@ -1,20 +1,38 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import { LoginBox } from './styled'
 import Button from '@mui/material/Button';
 import Logo from '../../assets/logo-laranja.svg'
-
+import { goToSignUp } from '../../Routes/coordinator';
+import useForm from './../../hooks/useForm';
+import { login } from '../../services/user';
+import { CircularProgress } from '@mui/material';
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  return (
+  const [form, onChange, clear, setForm] = useForm({  email: '',
+  password: '',
+  showPassword: false,})
+  const [isLoading, setIsLoading] = useState(false)
+  
+  
 
+const onSubmitForm = (event) =>{
+  event.preventDefault()
+  login(form, navigate, setIsLoading, clear)
+}
+
+  return (
     <LoginBox>
       <img src={Logo} alt="Logo" />
       <p>Entrar</p>
-      <div>
+     
+      <form onSubmit={onSubmitForm}>
         <TextField
+        name={"email"}
+        value={form.email}
+        onChange={onChange}
           fullWidth
           autoFocus
           margin={'normal'}
@@ -28,6 +46,9 @@ const LoginPage = () => {
           }}
         />
         <TextField
+         name={"password"}
+         value={form.password}
+         onChange={onChange}
           fullWidth
           autoFocus
           margin={'normal'}
@@ -41,8 +62,8 @@ const LoginPage = () => {
             shrink: true,
           }}
         />
-      </div>
-      <div>
+
+     
         <Button
           variant="contained"
           type={"submit"}
@@ -50,15 +71,17 @@ const LoginPage = () => {
           color={"primary"}
           margin={'normal'}
         >
-          Entrar
+          {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Entrar</>}
         </Button>
-      </div>
-      <Button type={"submit"}
+      </form>
+      
+      <Button 
+        onClick={() => goToSignUp(navigate)}
+        type={"submit"}
         fullWidth
         variant={"text"}
         color={"primary"}
         margin={"normal"}
-        onClick={() => navigate('/')}
       >
         Não possui cadastro? cadastre-se
       </Button>

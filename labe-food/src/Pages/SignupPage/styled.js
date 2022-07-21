@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const LoginBox = styled.div`
+export const SignUpPageContainer = styled.div`
     padding: 3px;
     display: flex;
     flex-direction: column;
@@ -11,8 +11,8 @@ export const LoginBox = styled.div`
     img{
       height: 50px;
     }
-    div{
-      margin-bottom: 10px;
-      width: 100%;
-    }
+  
+`
+export const InputsContainer = styled.div`
+
 `
