@@ -1,21 +1,77 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import Search from '../../Components/Search.js'
-import { goToHome, goToLoginPage } from '../../Routes/coordinator.js'
+import React, { useState, useEffect } from 'react';
+import Search from '../../Components/Search.js';
+import axios from 'axios';
+import CardRestaurant from '../../Components/CardRestaurant.js';
+import styled from 'styled-components';
+import Header from '../../Components/Header.js';
 
+const StyledBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
 const SearchPage = () => {
-  const navigate = useNavigate()
-  return (
-    <div>
-      <br />
-      <Search />
-      <br />
-      <button onClick={() => goToHome(navigate)}>Home</button>
-      <button onClick={() => goToLoginPage(navigate)}>Voltar Login</button>
-      <br />
-      <h3>Busque por nome de Restaurante</h3>
-    </div>
-  )
-}
+  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [searchTitle, setSearchTitle] = useState('');
 
-export default SearchPage
+  useEffect(() => {
+    const loadPost = async () => {
+      setLoading(true);
+      await axios
+        .get(
+          `https://us-central1-missao-newton.cloudfunctions.net/restaurants/}`,
+          {
+            headers: {
+              auth: localStorage.getItem('token'),
+            },
+          },
+        )
+        .then((response) => {
+          setPosts(response.data.restaurant);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    loadPost();
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <StyledBox>
+        <br />
+        <Search onChange={(e) => setSearchTitle(e.target.value)} />
+
+        <br />
+        <h3>Busque por nome de restaurante</h3>
+        {loading ? (
+          <h4>Carregando ... </h4>
+        ) : (
+          posts
+            // .filter((value) => {
+            //   if (searchTitle === '') {
+            //     return value;
+            //   } else if (
+            //     value.title.toLowerCase().includes(searchTitle.toLowerCase())
+            //   ) {
+            //     return value;
+            //   }
+            // })
+            .map((item) => (
+              <CardRestaurant key={item.id}>
+                {item.logoUrl}
+                {item.name} {item.shipping}
+                {item.deliveryTime}
+              </CardRestaurant>
+            ))
+        )}
+      </StyledBox>
+    </>
+  );
+};
+
+export default SearchPage;
