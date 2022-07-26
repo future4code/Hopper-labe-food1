@@ -1,50 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import Search from '../../Components/Search.js';
-import axios from 'axios';
-import CardRestaurant from '../../Components/CardRestaurant.js';
-import styled from 'styled-components';
-import Header from '../../Components/Header.js';
+import React, { useState, useEffect } from 'react'
+import Search from '../../Components/Search.js'
+import axios from 'axios'
+import CardRestaurant from '../../Components/CardRestaurant.js'
+import styled from 'styled-components'
+import Header from '../../Components/Header.js'
+import { BASE_URL } from '../../constants/url.js'
 
 const StyledBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-`;
+`
 const SearchPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState([]);
-  const [searchTitle, setSearchTitle] = useState('');
+  const [loading, setLoading] = useState(false)
+  const [posts, setPosts] = useState([])
+  const [searchTitle, setSearchTitle] = useState('')
 
   useEffect(() => {
     const loadPost = async () => {
-      setLoading(true);
+      setLoading(true)
       await axios
-        .get(
-          `https://us-central1-missao-newton.cloudfunctions.net/restaurants/}`,
-          {
-            headers: {
-              auth: localStorage.getItem('token'),
-            },
-          },
-        )
-        .then((response) => {
-          setPosts(response.data.restaurant);
-          setLoading(false);
+        .get(`${BASE_URL}/restaurants`, {
+          headers: {
+            auth: localStorage.getItem('token')
+          }
         })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    loadPost();
-  }, []);
+        .then(response => {
+          setPosts(response.data.restaurants)
+          console.log(response.data.restaurants)
+          setLoading(false)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+    loadPost()
+  }, [])
 
   return (
     <>
       <Header />
       <StyledBox>
         <br />
-        <Search onChange={(e) => setSearchTitle(e.target.value)} />
+        <Search onChange={e => setSearchTitle(e.target.value)} />
 
         <br />
         <h3>Busque por nome de restaurante</h3>
@@ -61,7 +60,7 @@ const SearchPage = () => {
             //     return value;
             //   }
             // })
-            .map((item) => (
+            .map(item => (
               <CardRestaurant key={item.id}>
                 {item.logoUrl}
                 {item.name} {item.shipping}
@@ -71,7 +70,7 @@ const SearchPage = () => {
         )}
       </StyledBox>
     </>
-  );
-};
+  )
+}
 
-export default SearchPage;
+export default SearchPage
