@@ -9,14 +9,19 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 const Footer = () => {
   return (
     <>
-      <Box>
+      <Box sx={{position:'fixed', bottom:'0', width:'100%'}}>
+
         <BottomNavigation>
+
           <BottomNavigationAction label="Recents" icon={<HomeIcon />} />
+
           <BottomNavigationAction
             label="Favorites"
             icon={<ShoppingCartOutlinedIcon />}
           />
+
           <BottomNavigationAction label="Nearby" icon={<PersonOutlineIcon />} />
+          
         </BottomNavigation>
       </Box>
     </>

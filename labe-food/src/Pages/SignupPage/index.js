@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import Button from '@mui/material/Button'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import IconButton from '@mui/material/IconButton'
@@ -9,10 +10,11 @@ import InputAdornment from '@mui/material/InputAdornment'
 import InputLabel from '@mui/material/InputLabel'
 import TextField from '@mui/material/TextField'
 import { CircularProgress } from '@mui/material'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+
 import { SignUpPageContainer, InputsContainer } from './styled'
 import Logo from '../../assets/logo-laranja.svg'
 import { goToLoginPage } from './../../Routes/coordinator'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import useForm from './../../hooks/useForm'
 import { signUp } from '../../services/user'
 

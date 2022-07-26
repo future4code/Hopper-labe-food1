@@ -1,5 +1,6 @@
 import React from 'react'
 import Box from '@mui/joy/Box'
+import {Categorias} from '../Pages/HomePage/styled'
 
 const Carousel = () => {
   return (
@@ -14,10 +15,14 @@ const Carousel = () => {
         '& > *': {
           scrollSnapAlign: 'center'
         },
-        '::-webkit-scrollbar-thumb': { display: 'none' }
+        '::-webkit-scrollbar': { display: 'none' }
       }}
     >
-      <p>hamburgueria</p> <p>hamburgueria</p>
+      <Categorias>
+        Hamburgueria
+      </Categorias>
+
+      <p>hamburgueria</p>
       <p>hamburgueria</p> <p>hamburgueria</p>
       <p>hamburgueria</p> <p>hamburgueria</p>
     </Box>
