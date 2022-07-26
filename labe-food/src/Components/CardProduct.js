@@ -1,45 +1,51 @@
 import React from 'react'
-// import styled from 'styled-components'
-import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
-import SkipNextIcon from '@mui/icons-material/SkipNext'
+import { BotaoAdd, BotaoQtd, BoxNomeQtd } from '../Pages/RestaurantsDetailsPage/styled'
 
-// const StyledAlign = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-// `
 
 const CardProduct = () => {
-  const theme = useTheme()
+
   return (
-    <Card sx={{ display: 'flex', width: 328 }}>
+    <Card sx={{ display: 'flex', width: "95%", border: "1px solid LightGrey", margin: "4px", borderRadius: '10px', height:'150px' }}>
+
       <CardMedia
         component="img"
-        sx={{ width: 97, height: 112.6 }}
+        sx={{ width: 97 }}
         image="https://www.sabornamesa.com.br/media/k2/items/cache/b9ad772005653afce4d4bd46c2efe842_XL.jpg"
         alt="Live from space album cover"
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            Live From Space
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
-            Mac Miller
-          </Typography>
-        </CardContent>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', width: '100%', borderRadius: '0 10px 10px 0' }}>
+
+          <BoxNomeQtd>
+
+            <Typography component="div" variant="h6" color={'primary'} sx={{paddingLeft:'15px'}}>
+              Nome do Prato
+            </Typography>
+
+            <BotaoQtd>2</BotaoQtd>
+
+          </BoxNomeQtd>
+
+          <div>
+
+            <Typography variant="body1" color={'neutralColor'} sx={{paddingLeft:'15px'}}>
+              Descrição do prato fjçlsjgdeçfj asd  as dfk  as f ka sfd af d adkj asdkjf sakdjf hsakjdf sajf
+            </Typography>
+          </div>
+
+          <BoxNomeQtd>
+            <Typography variant="h6" color="text.secondary" sx={{paddingLeft:'15px'}}>
+              R$ 20,20
+            </Typography>
+
+            <BotaoAdd>adicionar</BotaoAdd>
+
+          </BoxNomeQtd>
+
       </Box>
     </Card>
   )

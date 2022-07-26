@@ -1,15 +1,24 @@
-import {createTheme} from '@mui/material';
+import { createTheme } from '@mui/material';
 import { primaryColor, neutralColor } from './colors';
 
 const theme = createTheme({
-    palette:{
-        primary:{
-            main:primaryColor,
-            contrastText:"black"
+    typography: {
+        fontFamily: [
+            'Roboto',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            '"Helvetica Neue"',
+            'Arial',
+            '-apple-system',
+        ].join(','),
+    },
+    palette: {
+        primary: {
+            main: primaryColor,
+            contrastText: "black"
         },
-        text:{
-            primary:neutralColor
-            
+        text: {
+            primary: neutralColor
         }
     }
 })
