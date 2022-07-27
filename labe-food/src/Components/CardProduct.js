@@ -1,28 +1,28 @@
 import React from 'react'
 
-import styled from 'styled-components'
-import { useTheme } from '@mui/material/styles'
-
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography' 
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
-import SkipNextIcon from '@mui/icons-material/SkipNext'
-
 import Typography from '@mui/material/Typography'
-import { BotaoAdd, BotaoQtd, BoxNomeQtd } from '../Pages/RestaurantsDetailsPage/styled'
-
-
+import {
+  BotaoAdd,
+  BotaoQtd,
+  BoxNomeQtd
+} from '../Pages/RestaurantsDetailsPage/styled'
 
 const CardProduct = () => {
-
   return (
-    <Card sx={{ display: 'flex', width: "95%", border: "1px solid LightGrey", margin: "4px", borderRadius: '10px', height:'150px' }}>
-
+    <Card
+      sx={{
+        display: 'flex',
+        width: '95%',
+        border: '1px solid LightGrey',
+        margin: '4px',
+        borderRadius: '10px',
+        height: '150px'
+      }}
+    >
       <CardMedia
         component="img"
         sx={{ width: 97 }}
@@ -30,34 +30,51 @@ const CardProduct = () => {
         alt="Live from space album cover"
       />
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', width: '100%', borderRadius: '0 10px 10px 0' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          height: '100%',
+          width: '100%',
+          borderRadius: '0 10px 10px 0'
+        }}
+      >
+        <BoxNomeQtd>
+          <Typography
+            component="div"
+            variant="h6"
+            color={'primary'}
+            sx={{ paddingLeft: '15px' }}
+          >
+            Nome do Prato
+          </Typography>
 
-          <BoxNomeQtd>
+          <BotaoQtd>2</BotaoQtd>
+        </BoxNomeQtd>
 
-            <Typography component="div" variant="h6" color={'primary'} sx={{paddingLeft:'15px'}}>
-              Nome do Prato
-            </Typography>
+        <div>
+          <Typography
+            variant="body1"
+            color={'neutralColor'}
+            sx={{ paddingLeft: '15px' }}
+          >
+            Descrição do prato fjçlsjgdeçfj asd as dfk as f ka sfd af d adkj
+            asdkjf sakdjf hsakjdf sajf
+          </Typography>
+        </div>
 
-            <BotaoQtd>2</BotaoQtd>
+        <BoxNomeQtd>
+          <Typography
+            variant="h6"
+            color="text.secondary"
+            sx={{ paddingLeft: '15px' }}
+          >
+            R$ 20,20
+          </Typography>
 
-          </BoxNomeQtd>
-
-          <div>
-
-            <Typography variant="body1" color={'neutralColor'} sx={{paddingLeft:'15px'}}>
-              Descrição do prato fjçlsjgdeçfj asd  as dfk  as f ka sfd af d adkj asdkjf sakdjf hsakjdf sajf
-            </Typography>
-          </div>
-
-          <BoxNomeQtd>
-            <Typography variant="h6" color="text.secondary" sx={{paddingLeft:'15px'}}>
-              R$ 20,20
-            </Typography>
-
-            <BotaoAdd>adicionar</BotaoAdd>
-
-          </BoxNomeQtd>
-
+          <BotaoAdd>adicionar</BotaoAdd>
+        </BoxNomeQtd>
       </Box>
     </Card>
   )
