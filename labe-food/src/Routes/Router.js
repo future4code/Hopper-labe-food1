@@ -18,7 +18,7 @@ const Router = () => {
         <Route path={'/cadastro-endereco'} element={<AddressPage />} />
         <Route path={'/home'} element={<HomePage />} />
         <Route path={'/busca'} element={<SearchPage />} />
-        <Route path={'/restaurante/:id'} element={<RestaurantsDetailsPage />} />
+        <Route path={'/restaurante/:name'} element={<RestaurantsDetailsPage />} />
         <Route path={'/carrinho'} element={<CarrinhoPage />} />
         <Route path={'/perfil'} element={<ProfilePage />} />
       </Routes>

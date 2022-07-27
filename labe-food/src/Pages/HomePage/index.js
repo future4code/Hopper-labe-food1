@@ -8,27 +8,33 @@ import {
   goToLoginPage,
   goToRestaurant,
   goToSearch
-} from '../../Routes/coordinator'
+} from '../../Routes/coordinator.js'
+import { TelaHome, NomeApp } from './styled'
+
 
 const HomePage = () => {
   const navigate = useNavigate()
   return (
-    <div>
-      <br />
+    <TelaHome>
+      <NomeApp>Rappi4</NomeApp>
+
       <Search />
-      <br />
+
+      <div>
       <button onClick={() => goToRestaurant(navigate)}>Restaurante</button>
       <button onClick={() => goToLoginPage(navigate)}>Voltar Login</button>
       <button onClick={() => goToSearch(navigate)}>Buscar</button>
-      <br />
+      </div>
+
       <Carousel />
-      <br />
+
       <CardRestaurant />
-      <br />
+
       <CardRestaurant />
-      <br />
+
       <Footer />
-    </div>
+
+    </TelaHome>
   )
 }
 

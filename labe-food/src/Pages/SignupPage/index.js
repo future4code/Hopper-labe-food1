@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { SignUpPageContainer, InputsContainer } from './styled'
 import { goToLoginPage } from './../../Routes/coordinator'
 import useForm from './../../hooks/useForm'
 import { signUp } from '../../services/user'
@@ -9,10 +11,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { FlexForm } from './styled'
 import Logo from '../../assets/logo-laranja.svg'
 import { LogoImage, PageContainer } from '../LoginPage/styled'
-
-
-
-
 
 const SignUpPage = () => {
   const navigate = useNavigate()
