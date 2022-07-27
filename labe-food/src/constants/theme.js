@@ -17,9 +17,11 @@ const theme = createTheme({
             main: primaryColor,
             contrastText: "black"
         },
+
         text: {
             primary: neutralColor
         }
+
     }
 })
 

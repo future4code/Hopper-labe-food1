@@ -3,11 +3,7 @@ import { goToAdressPage, goToHome, goToProfile } from '../Routes/coordinator'
 import { BASE_URL } from './../constants/url'
 import { getHeader } from './header'
 
-export const login = (clear, navigate, setIsLoading) => {
-  const body = {
-    email: '',
-    password: ''
-  }
+export const login = (body, clear, navigate, setIsLoading) => {
   setIsLoading(true)
   axios
     .post(`${BASE_URL}/login`, body)

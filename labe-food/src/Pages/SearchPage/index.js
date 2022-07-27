@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Search from '../../Components/Search.js'
 import axios from 'axios'
-import CardRestaurant from '../../Components/CardRestaurant.js'
+import CardRestaurant from '../../Components/CardRestaurant'
 import styled from 'styled-components'
 import Header from '../../Components/Header.js'
 import { BASE_URL } from '../../constants/url.js'
@@ -15,7 +15,7 @@ const StyledBox = styled.div`
 const SearchPage = () => {
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
-  const [searchTitle, setSearchTitle] = useState('')
+  const [ setSearchTitle] = useState('')
 
   useEffect(() => {
     const loadPost = async () => {
