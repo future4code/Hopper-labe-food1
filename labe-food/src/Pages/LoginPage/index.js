@@ -1,91 +1,115 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import TextField from '@mui/material/TextField';
-import { LoginBox } from './styled'
-import Button from '@mui/material/Button';
+import useForm from './../../hooks/useForm'
+import { login } from '../../services/user'
+import { goToSignUp } from '../../Routes/coordinator'
+import { PageContainer, LogoImage, FormContainer } from './styled'
 import Logo from '../../assets/logo-laranja.svg'
-import { goToSignUp } from '../../Routes/coordinator';
-import useForm from './../../hooks/useForm';
-import { login } from '../../services/user';
-import { CircularProgress } from '@mui/material';
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import Typography from '@mui/material/Typography'
+import OutlinedInput from '@mui/material/OutlinedInput';
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel';
+import { CircularProgress } from '@mui/material'
+import InputAdornment from '@mui/material/InputAdornment'
+import IconButton from '@mui/material/IconButton'
+
+
+
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  const [form, onChange, clear, setForm] = useForm({  email: '',
-  password: '',
-  showPassword: false,})
-  const [isLoading, setIsLoading] = useState(false)
-  
-  
+  const [form, onChange, clear] = useForm({
+    email: '',
+    password: '',
 
-const onSubmitForm = (event) =>{
-  event.preventDefault()
-  login(form, navigate, setIsLoading, clear)
-}
+  })
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault()
+  }
+
+
+  const onSubmitLogin = (event) => {
+    event.preventDefault()
+    login(form, navigate, setIsLoading, clear)
+  }
 
   return (
-    <LoginBox>
-      <img src={Logo} alt="Logo" />
-      <p>Entrar</p>
-     
-      <form onSubmit={onSubmitForm}>
-        <TextField
-        name={"email"}
-        value={form.email}
-        onChange={onChange}
-          fullWidth
-          autoFocus
-          margin={'normal'}
-          required
-          id="outlined-required"
-          label="E-mail"
-          placeholder="email@email.com"
-          // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <TextField
-         name={"password"}
-         value={form.password}
-         onChange={onChange}
-          fullWidth
-          autoFocus
-          margin={'normal'}
-          required
-          id="outlined-disabled"
-          label="Senha"
-          placeholder="Senha"
-          type="password"
-          // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
+    <PageContainer>
+      <LogoImage src={Logo} />
+      <Typography variant="h5" align="center">
+        Entrar
+      </Typography>
 
-     
+      <FormContainer onSubmit={onSubmitLogin}>
+        <TextField
+           name="email"
+           value={form.email}
+           onChange={onChange}
+           type="email"
+           label="Email"
+           placeholder="email@email.com"
+           required
+           variant="outlined"
+
+        />
+        <FormControl variant="outlined">
+          <InputLabel required>Senha</InputLabel>
+          <OutlinedInput
+            name="password"
+            type={showPassword ? 'text' : 'password'}
+            value={form.password}
+            onChange={onChange}
+            required
+            label="Senha"
+            placeholder="Mínimo 6 caracteres"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  edge="end"
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+
+          />
+        </FormControl>
+
+
         <Button
           variant="contained"
           type={"submit"}
-          fullWidth
+          
           color={"primary"}
-          margin={'normal'}
+       
         >
-          {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Entrar</>}
+          {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Entrar</>}
         </Button>
-      </form>
-      
-      <Button 
+
+      </FormContainer>
+      <Button
         onClick={() => goToSignUp(navigate)}
-        type={"submit"}
         fullWidth
-        variant={"text"}
-        color={"primary"}
-        margin={"normal"}
+        margin={'normal'}
+
       >
-        Não possui cadastro? cadastre-se
+        Não possui cadastro? clique aqui.
       </Button>
-    </LoginBox>
+    </PageContainer>
   )
 }
 

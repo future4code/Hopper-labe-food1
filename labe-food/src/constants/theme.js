@@ -10,7 +10,8 @@ const theme = createTheme({
         text:{
             primary:neutralColor
             
-        }
+        },
+       
     }
 })
 

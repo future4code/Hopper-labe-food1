@@ -1,110 +1,117 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import {TextField, Button, Typography, CircularProgress} from "@mui/material"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { LoginBox } from "./styled";
+import { PageContainer, LogoImage } from "../LoginPage/styled";
 import { goToSignUp } from "../../Routes/coordinator";
-// import Logo from "../../assets/logo-laranja.svg";
+import useForm from './../../hooks/useForm';
+import { createAddAdress } from './../../services/user';
+import Logo from '../../assets/logo-laranja.svg'
+import { FormContainer } from './styled'
 
 const AddressPage = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
+  const [form, onChange, clear] =useForm({street: "", number: "", neighbourhood: "", city: "", state: "", complement: ""});
+  
+  const onSubmitForm = (event) => {
+    event.preventDefault(
+      createAddAdress(form, navigate, setIsLoading, clear )
+    )
+  }
+
+
   return (
-    <LoginBox>
-      <p onClick={() => goToSignUp (navigate)}><ArrowBackIosIcon fontSize="large"/></p>
-      <p>Meu Endereço</p>
-      <div>
+    <PageContainer>
+    <p onClick={() => goToSignUp(navigate)}>
+        <ArrowBackIosIcon fontSize="large" />
+      </p>
+      <LogoImage src={Logo} />
+      <Typography variant="h5" align="center">Meu endereço</Typography>
+      
+      <FormContainer onSubmit={onSubmitForm}>
         <TextField
-          fullWidth
-          margin={"normal"}
-          required
-          id="endereco"
-          placeholder="Rua/Av."
-          label="Logradouro"
-          // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
+         type="text"
+         fullWidth
+         name={"street"}
+         value={form.street}
+         onChange={onChange}
+         required
+         label="Logradouro"
+         placeholder="Rua/Av."
+         variant="outlined"
         />
         <TextField
           fullWidth
-          autoFocus
-          margin={"normal"}
+          type=""
+          name={"number"}
+          value={form.number}
+          onChange={onChange}
           required
-          id="numero"
           label="Número"
           placeholder="Número"
-          // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
+          variant="outlined"
         />
         <TextField
           fullWidth
-          autoFocus
-          margin={"normal"}
-          required
-          id="complemento"
+          type=""
+          name={"complement"}
+          value={form.complement}
+          onChange={onChange}
           label="Complemento"
           placeholder="Apto./Bloco"
-          // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
+          variant="outlined"
         />
         <TextField
           fullWidth
-          autoFocus
-          margin={"normal"}
-          required
-          id="bairro"
-          label="Bairro"
-          placeholder="Bairro"
-          // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
+          type="text"
+            name={"neighbourhood"}
+            value={form.neighbourhood}
+            onChange={onChange}
+            required
+            label="Bairro"
+            placeholder="Bairro"
+            variant="outlined"
         />
         <TextField
           fullWidth
-          autoFocus
-          margin={"normal"}
-          required
-          id="cidade"
-          label="Cidade"
-          placeholder="Cidade"
-          // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
+          type="text"
+            name={"city"}
+            value={form.city}
+            onChange={onChange}
+            required
+            label="Cidade"
+            placeholder="Cidade"
+            variant="outlined"
         />
         <TextField
           fullWidth
-          autoFocus
-          margin={"normal"}
+          type="text"
+          name={"state"}
+          value={form.state}
+          onChange={onChange}
           required
-          id="estado"
           label="Estado"
           placeholder="Estado"
-          // (InputLabelProps)Abaixo para deixar label fixo
-          InputLabelProps={{
-            shrink: true,
-          }}
+          variant="outlined"
         />
-      </div>
-      <div>
+      
+      
         <Button
           variant="contained"
           type={"submit"}
           fullWidth
           color={"primary"}
           margin={"normal"}
-          onSubmit={() => navigate("/cadastro-endereco")}
-        >
-          Salvar
+          >   {isLoading ? (
+            <CircularProgress color={'inherit'} size={24} />
+          ) : (
+            <>Salvar</>
+          )}
+          
         </Button>
-      </div>
-    </LoginBox>
+        </FormContainer>
+    </PageContainer>
   );
 };
 

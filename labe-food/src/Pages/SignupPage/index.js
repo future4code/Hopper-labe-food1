@@ -1,48 +1,46 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '@mui/material/Button'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import IconButton from '@mui/material/IconButton'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import InputAdornment from '@mui/material/InputAdornment'
-import InputLabel from '@mui/material/InputLabel'
-import TextField from '@mui/material/TextField'
-import { CircularProgress } from '@mui/material'
-import { SignUpPageContainer, InputsContainer } from './styled'
-import Logo from '../../assets/logo-laranja.svg'
 import { goToLoginPage } from './../../Routes/coordinator'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import useForm from './../../hooks/useForm'
 import { signUp } from '../../services/user'
+import {Button, OutlinedInput, IconButton, InputAdornment, FormControl, Typography, InputLabel, TextField, CircularProgress} from '@mui/material/'
+import {Visibility, VisibilityOff } from '@mui/icons-material'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { FlexForm } from './styled'
+import Logo from '../../assets/logo-laranja.svg'
+import { LogoImage, PageContainer } from '../LoginPage/styled'
+
+
+
+
 
 const SignUpPage = () => {
   const navigate = useNavigate()
-  const [form, setForm, onChange, clear] = useForm({
+  const [form, onChange, clear] = useForm({
     name: '',
     email: '',
     cpf: '',
     password: '',
-    showPassword: false,
-    showConfirm: false
   })
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [confirm, setConfirm] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  //ocultar senha e confirmação de senha e prevenir comportamento padrão seguindo o mui-material//
+
   const handleClickShowPassword = () => {
-    setForm({ ...form, showPassword: !form.showPassword })
+    setShowPassword(!showPassword)
   }
 
-  const handleMouseDownPassword = event => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault()
   }
 
   const handleClickShowConfirm = () => {
-    setForm({ ...form, showConfirm: !form.showConfirm })
+    setShowConfirmPassword(!showConfirmPassword)
   }
 
-  const handleMouseDownConfirm = event => {
+  const handleMouseDownConfirm = (event) => {
     event.preventDefault()
   }
   const onSubmitForm = event => {
@@ -59,76 +57,64 @@ const SignUpPage = () => {
   }
 
   return (
-    <form onSubmit={onSubmitForm}>
-      <SignUpPageContainer>
-        <p onClick={() => goToLoginPage(navigate)}>
-          <ArrowBackIosIcon fontSize="large" />
-        </p>
-        <img src={Logo} alt="Logo" />
-        <p>Entrar</p>
+    <PageContainer>
+      <p onClick={() => goToLoginPage(navigate)}>
+        <ArrowBackIosIcon fontSize="large" />
+      </p>
+      <LogoImage src={Logo} />
+      <Typography variant="h5" align="center">Cadastrar</Typography>
+        
 
-        <InputsContainer>
-          <TextField
-            value={form.name}
-            name={'name'}
-            onChange={onChange}
-            fullWidth
-            margin={'normal'}
-            required
-            id="nome"
-            placeholder="Nome e Sobrenome"
-            label="Nome"
-            // (InputLabelProps)Abaixo para deixar label fixo
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <TextField
-            value={form.email}
-            name={'email'}
-            onChange={onChange}
-            fullWidth
-            autoFocus
-            margin={'normal'}
-            required
-            id="email"
-            label="Email"
-            placeholder="email@email.com"
-            // (InputLabelProps)Abaixo para deixar label fixo
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <TextField
-            name={'cpf'}
-            value={form.cpf}
-            onChange={onChange}
-            fullWidth
-            autoFocus
-            margin={'normal'}
-            required
-            id="cpf"
-            label="CPF"
-            placeholder="000.000.000-00"
-            type="number"
-            // (InputLabelProps)Abaixo para deixar label fixo
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <InputLabel>Senha*</InputLabel>
+      <FlexForm onSubmit={onSubmitForm}>
+        <TextField
+          value={form.name}
+          name={'name'}
+          onChange={onChange}
+          required
+          label="Nome"
+          placeholder="Nome e sobrenome"
+          type="text"
+          variant="outlined"
+
+
+        />
+        <TextField
+          name={'email'}
+          value={form.email}
+          onChange={onChange}
+          required
+          label="E-mail"
+          type="email"
+          variant="outlined"
+          placeholder="email@email.com"
+
+        />
+        <TextField
+          inputProps={{
+            maxLength: 14,
+            pattern: `([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})`,
+          }}
+          name={'cpf'}
+          value={form.cpf}
+          onChange={onChange}
+          required
+          label="CPF"
+          placeholder="000.000.000-00"
+          variant="outlined"
+          type="text"
+        />
+        <FormControl variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
           <OutlinedInput
+            inputProps={{ pattern: "[0-9a-zA-Z]{6,}" }}
             name="password"
-            type={form.showPassword ? 'text' : 'password'}
+            type={showPassword ? 'text' : 'password'}
             value={form.password}
             onChange={onChange}
-            fullWidth
-            autoFocus
-            margin={'normal'}
+            id="outlined-adornment-password"
             required
-            id="senha"
-            label="Senha"
             placeholder="Mínimo 6 caracteres"
+            label="Senha"
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -137,27 +123,24 @@ const SignUpPage = () => {
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                 >
-                  {form.showPassword ? <Visibility /> : <VisibilityOff />}
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
             }
-            // (InputLabelProps)Abaixo para deixar label fixo
-            // InputLabelProps={{
-            //   shrink: true,
-            // }}
+            labelWidth={70}
           />
+        </FormControl>
+        <FormControl variant="outlined">
 
-          <InputLabel>Confirmar*</InputLabel>
+          <InputLabel htmlFor="outlined-confirm-password">Confirmar Senha</InputLabel>
           <OutlinedInput
+          inputProps={{ pattern: "[0-9a-zA-Z]{6,}" }}
             name="confirm-password"
-            type={form.showConfirm ? 'text' : 'password'}
+            type={showConfirmPassword ? 'text' : 'password'}
             value={form.confirm}
             onChange={handleConfirm}
-            fullWidth
-            autoFocus
-            margin={'normal'}
             required
-            id="confirm"
+            id="outlined-confirm-password"
             label="Confirme"
             placeholder="Confirme a Senha Anterior"
             endAdornment={
@@ -168,17 +151,14 @@ const SignUpPage = () => {
                   onClick={handleClickShowConfirm}
                   onMouseDown={handleMouseDownConfirm}
                 >
-                  {form.showConfirm ? <Visibility /> : <VisibilityOff />}
+                  {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
             }
 
-            // (InputLabelProps)Abaixo para deixar label fixo
-            // InputLabelProps={{
-            //   shrink: true,
-            // }}
+
           />
-        </InputsContainer>
+        </FormControl>
 
         <Button
           variant="contained"
@@ -193,8 +173,9 @@ const SignUpPage = () => {
             <>Criar</>
           )}
         </Button>
-      </SignUpPageContainer>
-    </form>
+      </FlexForm>
+    
+    </PageContainer>
   )
 }
 

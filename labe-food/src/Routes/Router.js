@@ -6,7 +6,7 @@ import HomePage from '../Pages/HomePage'
 import LoginPage from '../Pages/LoginPage'
 import ProfilePage from '../Pages/ProfilePage'
 import RestaurantsDetailsPage from '../Pages/RestaurantsDetailsPage'
-import SignUpPage from '../Pages/SignupPage'
+import SignUpPage from "../Pages/SignUpPage/index"
 import SearchPage from '../Pages/SearchPage'
 
 const Router = () => {

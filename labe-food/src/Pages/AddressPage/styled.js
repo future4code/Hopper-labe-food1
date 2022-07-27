@@ -1,18 +1,11 @@
 import styled from "styled-components"
 
-export const LoginBox = styled.div`
-    padding: 3px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    img{
-      height: 50px;
-    }
-    div{
-      margin-bottom: 5px;
-      width: 100%;
-    }
+export const FormContainer = styled.form`
+height: 100%;
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 `

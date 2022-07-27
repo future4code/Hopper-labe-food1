@@ -1,18 +1,27 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-export const LoginBox = styled.div`
-    padding: 5px;
+
+export const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
+    width: 85vw;
+    max-width: 465px;
+    margin: 0 auto;
     justify-content: center;
-    align-items: center;
-    height: 70vh;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    img{
-      height: 50px;
-    }
-    div{
-      margin-bottom: 10px;
-      width: 100%;
-    }
+    padding: 1em;
 `
+export const LogoImage = styled.img`
+    width: 40%;
+    max-width: 350px;
+    margin: 20px auto;
+`
+export const FormContainer = styled.form`
+     display: flex;
+     flex-direction: column;
+     height: 28vh;
+     justify-content: space-evenly;
+     margin-bottom: 15px;
+   
+
+`
+
