@@ -13,15 +13,15 @@ const StyledAlign = styled.div`
   width: 70%;
 `
 
-const CardRestaurantDetail = () => {
+const CardRestaurantDetail = (props) => {
   return (
     <Card  sx={{ width: "95%", border:"1px solid LightGrey", margin:"4px", borderRadius:'10px' }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="https://www.sabornamesa.com.br/media/k2/items/cache/b9ad772005653afce4d4bd46c2efe842_XL.jpg"
-          alt="hamburguer"
+          src={props.logoUrl}
+          alt="Imagem Restaurante"
         />
 
         <CardContent sx={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
@@ -31,24 +31,24 @@ const CardRestaurantDetail = () => {
             component="div"
             color={'primary'}
           >
-            Nome Restaurante
+            {props.name}
           </Typography>
 
           <Typography variant="body1" color={'neutralColor'}>
-            Categoria Restaurante
+            {props.category}
           </Typography>
 
           <StyledAlign>
             <Typography variant="body1" color={'neutralColor'}>
-              40 - 60 min
+            {props.deliveryTime} - {props.deliveryTime - 10} min
             </Typography>
             <Typography variant="body1" color={'neutralColor'}>
-              Frete R$ 18,00
+              Frete R$:{props.shipping},00
             </Typography>
           </StyledAlign>
 
           <Typography variant="body1" color={'neutralColor'}>
-            Endereço Restaurante
+            {props.address}
           </Typography>
 
         </CardContent>
