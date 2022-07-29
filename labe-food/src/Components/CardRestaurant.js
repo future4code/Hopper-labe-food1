@@ -30,7 +30,7 @@ const CardRestaurant = (props) => {
             component="div"
             color={'primary'}
           >
-            {props.nome}
+            {props.name}
           </Typography>
 
           <StyledAlign>

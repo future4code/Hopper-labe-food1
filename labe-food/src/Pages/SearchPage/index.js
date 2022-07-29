@@ -3,6 +3,8 @@ import { BASE_URL } from '../../constants/url.js';
 import CardRestaurant from '../../Components/CardRestaurant.js';
 import { useGetRest } from '../../hooks/useGetRest.js';
 import { useState } from 'react';
+import { Categorias, NomeApp, Buscador } from './styled.js';
+import Footer from '../../Components/Footer.js';
 
 const StyledBox = styled.div`
   display: flex;
@@ -29,13 +31,15 @@ const SearchPage = () => {
 
   return (
     <StyledBox>
-      <input value={busca} onChange={(e) => setBusca(e.target.value)} />
-      <select value={select} onChange={(e) => setSelect(e.target.value)}>
-        <option>Categoria</option>
+      <NomeApp>Rappi4</NomeApp>
+      <Buscador value={busca} onChange={(e) => setBusca(e.target.value)} />
+      <Categorias value={select} onChange={(e) => setSelect(e.target.value)}>
+        <li>Categoria</li>
         {infoRestaurante.map((info) => (
-          <option>{info.category}</option>
+          <li>{info.category}</li>
         ))}
-      </select>
+      </Categorias>
+      
 
       {restauranteFiltrado.map((item) => (
         <CardRestaurant
@@ -47,6 +51,7 @@ const SearchPage = () => {
           deliveryTime={item.deliveryTime}
         />
       ))}
+      <Footer />
     </StyledBox>
   );
 };
