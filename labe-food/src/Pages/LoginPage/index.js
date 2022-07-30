@@ -93,8 +93,8 @@ const LoginPage = () => {
         <Button
           variant="contained"
           type={"submit"}
-          
           color={"primary"}
+          
        
         >
           {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Entrar</>}
@@ -104,7 +104,8 @@ const LoginPage = () => {
       <Button
         onClick={() => goToSignUp(navigate)}
         fullWidth
-        margin={'normal'}
+        
+        
 
       >
         Não possui cadastro? clique aqui.
