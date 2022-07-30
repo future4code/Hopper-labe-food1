@@ -125,7 +125,7 @@ const SignUpPage = () => {
                 </IconButton>
               </InputAdornment>
             }
-            labelWidth={70}
+           
           />
         </FormControl>
         <FormControl variant="outlined">

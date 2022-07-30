@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { goToAdressPage, goToHome, goToProfile } from '../Routes/coordinator'
+import { goToAdressPage, goToHome, goToProfile, goToLoginPage} from '../Routes/coordinator'
 import { BASE_URL } from './../constants/url'
 import { getHeader } from './header'
 
@@ -7,15 +7,15 @@ export const login = (body, clear, navigate, setIsLoading) => {
   setIsLoading(true)
   axios
     .post(`${BASE_URL}/login`, body)
-    .then(res => {
+    .then((res) => {
       localStorage.setItem('token', res.data.token)
       setIsLoading(false)
       goToHome(navigate)
       clear()
     })
-    .catch(err => {
+    .catch((err) => {
+      // console.log(err.response.data.message)
       setIsLoading(false)
-      alert(err.response.data.message)
     })
 }
 
@@ -32,8 +32,8 @@ export const signUp = (body, navigate, setIsLoading, clear) => {
       console.log(res.data)
     })
     .catch(err => {
-      setIsLoading(false)
       alert(err.response.data.message)
+      setIsLoading(false)
     })
 }
 
@@ -79,3 +79,22 @@ export const updateAddress = (body, navigate, setIsLoading, clear) => {
       setIsLoading(false)
     })
 }
+
+export const getFullAddress = (setterAddress, setIsLoading) => {
+  setIsLoading(true)
+  axios
+  .get(`${BASE_URL}/profile/address`, getHeader())
+  .then((res)=>{
+    setterAddress(res.data.address);
+    setIsLoading(false)
+  })
+  .catch((err)=>{
+    alert('Ops! algo deu errado ao alterar o endereço!')
+    setIsLoading(false)
+  })
+}
+
+export const logout = (navigate) => {
+  localStorage.removeItem("token");
+  goToLoginPage(navigate)
+};

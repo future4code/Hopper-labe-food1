@@ -18,9 +18,12 @@ const theme = createTheme({
             contrastText: "black"
         },
 
-        text: {
-            primary: neutralColor
-        }
+        secondary: {
+            main: neutralColor,
+            contrastText: 'black',
+            
+        },
+      
 
     }
 })

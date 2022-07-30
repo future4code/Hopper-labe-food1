@@ -6,8 +6,10 @@ import HomePage from '../Pages/HomePage'
 import LoginPage from '../Pages/LoginPage'
 import ProfilePage from '../Pages/ProfilePage'
 import RestaurantsDetailsPage from '../Pages/RestaurantsDetailsPage'
-import SignUpPage from '../Pages/SignupPage'
+import SignUpPage from '../Pages/SignUpPage'
 import SearchPage from '../Pages/SearchPage'
+import EditProfilePage from './../Pages/EditProfilePage/index';
+import EditAddressPage from './../Pages/EditAddressPage/index';
 
 const Router = () => {
   return (
@@ -24,6 +26,10 @@ const Router = () => {
         />
         <Route path={'/carrinho'} element={<CarrinhoPage />} />
         <Route path={'/perfil'} element={<ProfilePage />} />
+        <Route path={'/editar-perfil'} element= {<EditProfilePage/>}/>
+        <Route path={'/editar-endereco'} element= {<EditAddressPage/>}/>
+
+
       </Routes>
     </BrowserRouter>
   )

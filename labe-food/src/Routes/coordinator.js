@@ -29,3 +29,15 @@ export const goToProfile = navigate => {
 export const goToSearch = navigate => {
   navigate('/busca')
 }
+
+export const goBack = navigate => {
+  navigate(-1)
+}
+
+export const goToEditProfile = navigate => {
+  navigate('/editar-perfil')
+}
+
+export const goToEditAddress = navigate => {
+  navigate('/editar-endereco')
+}
