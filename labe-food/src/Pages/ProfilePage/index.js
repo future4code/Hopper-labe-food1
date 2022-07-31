@@ -13,6 +13,7 @@ import { GlobalStateContext } from './../../global/GlobalStateContatex';
 import { PageContainer } from '../LoginPage/styled'
 import { goToLoginPage } from '../../Routes/coordinator'
 import useProtectedPage from './../../hooks/useProtectedPage';
+import { getOrdersHistory } from '../../services/ordersHistory'
 
 
  const ProfilePage = () => {
@@ -23,9 +24,12 @@ import useProtectedPage from './../../hooks/useProtectedPage';
   const address = states.address
   const [isLoading, setIsLoading] = useState(false)
 
+
+
   useEffect(() => {
     getProfile(setters.setProfile, setIsLoading);
     getFullAddress(setters.setAddress, setIsLoading)
+    getOrdersHistory(setters.setOrdersHistory)
   }, [])
 
   const onClickLogout = () => {
@@ -34,12 +38,25 @@ import useProtectedPage from './../../hooks/useProtectedPage';
   }
 
 
+  //Feito agora
+  const mapHistory = states.orderHistory.map((ord) => {
+    return(
+    <div key={ord.creatdAt}>
+      <h2>{ord.restaurantName}</h2>
+      data
+      <h2>SUBTOTAL R$ {ord.totalPrice.toFixed(2).replace('.', ',')}</h2>
+    </div>
+
+    )})
+
+
   return (
     <PageContainer>
 
       <button onClick={() => onClickLogout(navigate)}>Logout</button>
 
       <button onClick={() => navigate('/home')}>Voltar pra Home</button>
+
       {isLoading && address ? (
         <CircularProgress />
       ) : (
@@ -64,7 +81,14 @@ import useProtectedPage from './../../hooks/useProtectedPage';
 
          </div>
       )}
-      <Footer color={'primary'} />
+
+      <h3>Histórico de pedidos</h3>
+
+  {/* // feito agora */}
+      {mapHistory}
+
+
+      <Footer />
     </PageContainer>
   )
 }
