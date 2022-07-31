@@ -12,12 +12,12 @@ import {
   BoxNomeQtd
 } from '../Pages/RestaurantsDetailsPage/styled'
 
-const CardProduct = () => {
+const CardProduct = (props) => {
   return (
     <Card
       sx={{
         display: 'flex',
-        width: '95%',
+        minWidth: '95%',
         border: '1px solid LightGrey',
         margin: '4px',
         borderRadius: '10px',
@@ -27,7 +27,8 @@ const CardProduct = () => {
       <CardMedia
         component="img"
         sx={{ width: 97 }}
-        image="https://www.sabornamesa.com.br/media/k2/items/cache/b9ad772005653afce4d4bd46c2efe842_XL.jpg"
+        // image="https://www.sabornamesa.com.br/media/k2/items/cache/b9ad772005653afce4d4bd46c2efe842_XL.jpg"
+        src={props.photoUrl}
         alt="Live from space album cover"
       />
 
@@ -48,7 +49,7 @@ const CardProduct = () => {
             color={'primary'}
             sx={{ paddingLeft: '15px' }}
           >
-            Nome do Prato
+            {props.name}
           </Typography>
 
           <BotaoQtd>2</BotaoQtd>
@@ -60,8 +61,7 @@ const CardProduct = () => {
             color={'neutralColor'}
             sx={{ paddingLeft: '15px' }}
           >
-            Descrição do prato fjçlsjgdeçfj asd as dfk as f ka sfd af d adkj
-            asdkjf sakdjf hsakjdf sajf
+            {props.description}
           </Typography>
         </div>
 
@@ -71,10 +71,13 @@ const CardProduct = () => {
             color="text.secondary"
             sx={{ paddingLeft: '15px' }}
           >
-            R$ 20,20
+            R$:{props.price.toFixed(2).replace('.', ',')}
           </Typography>
 
-          <BotaoAdd>adicionar</BotaoAdd>
+          <BotaoAdd
+          
+            key={props.id} 
+          >adicionar</BotaoAdd>
         </BoxNomeQtd>
       </Box>
     </Card>

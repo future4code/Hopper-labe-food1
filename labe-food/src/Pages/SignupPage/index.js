@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { SignUpPageContainer, InputsContainer } from './styled'
+// import { SignUpPageContainer, InputsContainer } from './styled'
 import { goToLoginPage } from './../../Routes/coordinator'
 import useForm from './../../hooks/useForm'
 import { signUp } from '../../services/user'
 import {Button, OutlinedInput, IconButton, InputAdornment, FormControl, Typography, InputLabel, TextField, CircularProgress} from '@mui/material/'
 import {Visibility, VisibilityOff } from '@mui/icons-material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { FlexForm } from './styled'
+import { FlexForm } from "./styled";
 import Logo from '../../assets/logo-laranja.svg'
 import { LogoImage, PageContainer } from '../LoginPage/styled'
 
