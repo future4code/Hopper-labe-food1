@@ -5,16 +5,18 @@ import Footer from '../../Components/Footer'
 import { StyleDetail, StyledAddress } from './styled'
 import CircularProgress from '@mui/material/CircularProgress'
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined';
-import { getFullAddress, logout } from './../../services/user';
+import { getFullAddress} from './../../services/user';
 import { goToEditProfile } from '../../Routes/coordinator'
 import { goToEditAddress } from '../../Routes/coordinator'
 import { getProfile } from '../../services/profile'
 import { GlobalStateContext } from './../../global/GlobalStateContatex';
 import { PageContainer } from '../LoginPage/styled'
 import { goToLoginPage } from '../../Routes/coordinator'
+import useProtectedPage from './../../hooks/useProtectedPage';
 
 
  const ProfilePage = () => {
+  useProtectedPage();
   const navigate = useNavigate()
   const {states, setters} = useContext(GlobalStateContext)
   const profile = states.profile

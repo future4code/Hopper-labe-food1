@@ -8,8 +8,10 @@ import useForm from './../../hooks/useForm';
 import { createAddAdress } from './../../services/user';
 import Logo from '../../assets/logo-laranja.svg'
 import { FormContainer } from './styled'
+import useProtectedPage from './../../hooks/useProtectedPage';
 
 const AddressPage = () => {
+  useProtectedPage();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
   const [form, onChange, clear] =useForm({street: "", number: "", neighbourhood: "", city: "", state: "", complement: ""});

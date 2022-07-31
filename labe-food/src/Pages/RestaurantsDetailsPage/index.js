@@ -5,8 +5,10 @@ import CardRestaurantDetail from '../../Components/CardRestaurantDetail'
 import { useGetRest } from '../../hooks/useGetRest'
 import { NomeApp, TelaRestaurante, NomeCategoria } from './styled'
 import { BASE_URL } from '../../constants/url'
+import useProtectedPage from './../../hooks/useProtectedPage';
 
 const RestaurantsDetailsPage = () => {
+  useProtectedPage();
   const navigate = useNavigate();
   const params =  useParams();
   const [infoRestauranteId] = useGetRest(`${BASE_URL}/${params.id}`);

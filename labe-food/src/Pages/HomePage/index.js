@@ -7,6 +7,7 @@ import { Categorias, NomeApp, Buscador, TelaHome } from './styled.js';
 import Footer from '../../Components/Footer.js';
 import { goToRestaurant } from '../../Routes/coordinator.js';
 import { useNavigate } from 'react-router-dom'
+import useProtectedPage from './../../hooks/useProtectedPage';
 
 
 const StyledBox = styled.div`
@@ -19,6 +20,7 @@ const StyledBox = styled.div`
 
 
 const HomePage = () => {
+  useProtectedPage();
 
   const [infoRestaurante] = useGetRest(`${BASE_URL}/restaurants`);
   const [busca, setBusca] = useState('');

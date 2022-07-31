@@ -8,9 +8,11 @@ import { PageContainer } from './../LoginPage/styled';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Button, TextField, CircularProgress, Typography } from '@mui/material/'
 import { FormContainer } from "../AddressPage/styled";
+import useProtectedPage from './../../hooks/useProtectedPage';
 
 
 const EditAddressPage = () => {
+    useProtectedPage();
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
     const { states, setters } = useContext(GlobalStateContext)

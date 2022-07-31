@@ -5,30 +5,29 @@ import { login } from '../../services/user'
 import { goToSignUp } from '../../Routes/coordinator'
 import { PageContainer, LogoImage, FormContainer } from './styled'
 import Logo from '../../assets/logo-laranja.svg'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import Typography from '@mui/material/Typography'
-import OutlinedInput from '@mui/material/OutlinedInput';
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel';
-import { CircularProgress } from '@mui/material'
-import InputAdornment from '@mui/material/InputAdornment'
-import IconButton from '@mui/material/IconButton'
+import { TextField, Button, Typography, OutlinedInput, FormControl, InputLabel, CircularProgress, InputAdornment, IconButton } from '@mui/material/'
+import { Visibility, VisibilityOff } from '@mui/icons-material/'
+import useUnProtectedPage from './../../hooks/useUnProtectedPage';
+import SplashPage from '../SplashPage/index'
+
+
+
 
 
 
 
 const LoginPage = () => {
+  useUnProtectedPage();
+  const [screen, setScreen] = useState()
   const navigate = useNavigate()
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [form, onChange, clear] = useForm({
     email: '',
     password: '',
 
   })
-  const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
@@ -39,33 +38,35 @@ const LoginPage = () => {
   }
 
 
-  const onSubmitLogin = (event) => {
-    event.preventDefault()
+  const submitLogin = (e) => {
+    e.preventDefault()
     login(form, navigate, setIsLoading, clear)
   }
 
   return (
     <PageContainer>
+{screen && <SplashPage setScreen={setScreen}/>}
       <LogoImage src={Logo} />
       <Typography variant="h5" align="center">
         Entrar
       </Typography>
 
-      <FormContainer onSubmit={onSubmitLogin}>
+      <FormContainer onSubmit={submitLogin}>
         <TextField
-           name="email"
-           value={form.email}
-           onChange={onChange}
-           type="email"
-           label="Email"
-           placeholder="email@email.com"
-           required
-           variant="outlined"
+          name="email"
+          value={form.email}
+          onChange={onChange}
+          type="email"
+          label="Email"
+          placeholder="email@email.com"
+          required
+          variant="outlined"
 
         />
         <FormControl variant="outlined">
           <InputLabel required>Senha</InputLabel>
           <OutlinedInput
+            id={"password"}
             name="password"
             type={showPassword ? 'text' : 'password'}
             value={form.password}
@@ -93,19 +94,22 @@ const LoginPage = () => {
         <Button
           variant="contained"
           type={"submit"}
+          fullWidth
           color={"primary"}
-          
-       
-        >
-          {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Entrar</>}
+          margin={"normal"}
+        >   {isLoading ? (
+          <CircularProgress color={'inherit'} size={24} />
+        ) : (
+          <>Entrar</>
+        )}
         </Button>
 
       </FormContainer>
       <Button
         onClick={() => goToSignUp(navigate)}
         fullWidth
-        
-        
+
+
 
       >
         Não possui cadastro? clique aqui.
