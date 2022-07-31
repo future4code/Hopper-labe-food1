@@ -5,6 +5,7 @@ import CardRestaurantDetail from '../../Components/CardRestaurantDetail'
 import { useGetRest } from '../../hooks/useGetRest'
 import { TelaRestaurante, NomeCategoria, HeaderResDetail } from './styled'
 import { BASE_URL } from '../../constants/url'
+import useProtectedPage from './../../hooks/useProtectedPage';
 import { Typography } from '@mui/material'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
@@ -12,6 +13,7 @@ import { useRestaurantsDetail } from '../../services/restaurantsDetail'
 
 
 const RestaurantsDetailsPage = (props) => {
+  useProtectedPage();
   // const navigate = useNavigate();
   const {id} = useParams();
   const [infoRestauranteId] = useRestaurantsDetail("2");

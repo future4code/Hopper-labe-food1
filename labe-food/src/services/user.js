@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 import { goToAdressPage, goToHome, goToProfile, goToLoginPage} from '../Routes/coordinator'
 import { BASE_URL } from './../constants/url'
@@ -8,14 +9,15 @@ export const login = (body, clear, navigate, setIsLoading) => {
   axios
     .post(`${BASE_URL}/login`, body)
     .then((res) => {
-      localStorage.setItem('token', res.data.token)
       setIsLoading(false)
+      localStorage.setItem('token', res.data.token)
       goToHome(navigate)
       clear()
+      
     })
-    .catch((err) => {
-      // console.log(err.response.data.message)
+    .catch(err => {
       setIsLoading(false)
+    
     })
 }
 

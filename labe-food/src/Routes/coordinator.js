@@ -1,5 +1,5 @@
 export const goToLoginPage = navigate => {
-  navigate('/')
+  navigate('/login')
 }
 
 export const goToSignUp = navigate => {

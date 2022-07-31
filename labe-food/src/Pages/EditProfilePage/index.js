@@ -9,8 +9,10 @@ import { getProfile } from "../../services/profile";
 import { PageContainer } from "../LoginPage/styled";
 import { FlexForm } from "../SignupPage/styled"
 import { GlobalStateContext } from './../../global/GlobalStateContatex';
+import useProtectedPage from './../../hooks/useProtectedPage';
 
 const EditProfilePage = () => {
+    useProtectedPage();
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
     const { states, setters } = useContext(GlobalStateContext)

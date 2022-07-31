@@ -5,18 +5,15 @@ const useForm = (initialState) => {
 
     const onChange = (event) => {
         const { value, name } = event.target
-        const newForm = { ...form, [name]: value }
-        setForm(newForm)
+        setForm({...form, [name]: value})
     }
 
     const clear = () => {
         setForm(initialState)
     }
 
-    const setStates = (states) => {
-        setForm(states)
-    }
-    return [form, onChange, clear, setStates]
+   
+    return [form, onChange, clear, setForm]
 }
 
 export default useForm
