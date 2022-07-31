@@ -1,20 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import React from 'react'
+import styled from 'styled-components'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
+import { CardActionArea } from '@mui/material'
 
 const StyledAlign = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`;
+`
 
-const CardRestaurant = (props) => {
+const CardRestaurant = props => {
   return (
-    <Card sx={{ width: '95%', border: '1px solid LightGrey', margin: '4px' }}>
+    <Card
+      onClick={() => props.goToRestaurant(props.navigate, props.id)}
+      sx={{ width: '95%', border: '1px solid LightGrey', margin: '4px' }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
@@ -45,7 +48,7 @@ const CardRestaurant = (props) => {
         </CardContent>
       </CardActionArea>
     </Card>
-  );
-};
+  )
+}
 
-export default CardRestaurant;
+export default CardRestaurant
