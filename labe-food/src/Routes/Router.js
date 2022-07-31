@@ -6,7 +6,7 @@ import HomePage from '../Pages/HomePage'
 import LoginPage from '../Pages/LoginPage'
 import ProfilePage from '../Pages/ProfilePage'
 import RestaurantsDetailsPage from '../Pages/RestaurantsDetailsPage'
-import SignUpPage from '../Pages/SignUpPage'
+import SignUpPage from '../Pages/SignupPage'
 import SearchPage from '../Pages/SearchPage'
 import EditProfilePage from './../Pages/EditProfilePage/index';
 import EditAddressPage from './../Pages/EditAddressPage/index';

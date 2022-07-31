@@ -1,3 +1,4 @@
+import { style } from "@mui/system"
 import styled from "styled-components"
 
 export const TelaRestaurante = styled.div`
@@ -17,9 +18,12 @@ export const NomeApp = styled.p`
 
 export const NomeCategoria = styled.p`
     border-bottom: 1px solid;
-    width: 100%;
+    /* min-width:100vw; */
+    width: 100vw;
     padding-bottom: 10px;
     font-size: 16px;
+    display:Flex;
+    justify-content: center
 `
 
 export const BoxNomeQtd = styled.div`
