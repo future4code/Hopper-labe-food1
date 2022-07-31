@@ -7,7 +7,7 @@ import { editProfile } from "../../services/profile";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { getProfile } from "../../services/profile";
 import { PageContainer } from './../LoginPage/styled';
-import { FlexForm } from './../SignUpPage/styled';
+import { FlexForm } from '../SignupPage/styled';
 import { GlobalStateContext } from './../../global/GlobalStateContatex';
 
 const EditProfilePage = () => {
