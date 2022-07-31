@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useForm from './../../hooks/useForm'
 import { login } from '../../services/user'
-import { goToSignUp } from '../../Routes/coordinator'
+import { goToHome, goToSignUp } from '../../Routes/coordinator'
 import { PageContainer, LogoImage, FormContainer } from './styled'
 import Logo from '../../assets/logo-laranja.svg'
 import TextField from '@mui/material/TextField'
@@ -97,7 +97,7 @@ const LoginPage = () => {
           
        
         >
-          {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Entrar</>}
+          {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Entrar</> }
         </Button>
 
       </FormContainer>
