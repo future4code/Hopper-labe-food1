@@ -13,7 +13,7 @@ import { GlobalStateContext } from './../../global/GlobalStateContatex';
 import { PageContainer } from '../LoginPage/styled'
 import { goToLoginPage } from '../../Routes/coordinator'
 import useProtectedPage from './../../hooks/useProtectedPage';
-import { getOrdersHistory } from '../../services/ordersHistory'
+import { useHistoryDetail } from '../../services/historyDetail';
 
 
  const ProfilePage = () => {
@@ -23,13 +23,13 @@ import { getOrdersHistory } from '../../services/ordersHistory'
   const profile = states.profile
   const address = states.address
   const [isLoading, setIsLoading] = useState(false)
-
+  const [historyDetail] = useHistoryDetail()
 
 
   useEffect(() => {
     getProfile(setters.setProfile, setIsLoading);
-    getFullAddress(setters.setAddress, setIsLoading)
-    getOrdersHistory(setters.setOrdersHistory)
+    getFullAddress(setters.setAddress, setIsLoading);
+    // useHistoryDetail()
   }, [])
 
   const onClickLogout = () => {
@@ -37,18 +37,7 @@ import { getOrdersHistory } from '../../services/ordersHistory'
     goToLoginPage(navigate)
   }
 
-
-  //Feito agora
-  const mapHistory = states.orderHistory.map((ord) => {
-    return(
-    <div key={ord.creatdAt}>
-      <h2>{ord.restaurantName}</h2>
-      data
-      <h2>SUBTOTAL R$ {ord.totalPrice.toFixed(2).replace('.', ',')}</h2>
-    </div>
-
-    )})
-
+  console.log(historyDetail)
 
   return (
     <PageContainer>
@@ -79,13 +68,19 @@ import { getOrdersHistory } from '../../services/ordersHistory'
           <p onClick={()=> goToEditAddress(navigate)}><ModeOutlinedIcon/></p>
           </StyledAddress>
 
+          <h3>Histórico de pedidos</h3>
+  
+  
+          {historyDetail && historyDetail.map(item => (
+            <div>
+                <h2>{item.restaurantName}</h2>
+                <h2>SUBTOTAL R$ {item.totalPrice.toFixed(2).replace('.', ',')}</h2>
+            </div>
+            
+          ))}
          </div>
       )}
 
-      <h3>Histórico de pedidos</h3>
-
-  {/* // feito agora */}
-      {mapHistory}
 
 
       <Footer />

@@ -50,7 +50,7 @@ const RestaurantsDetailsPage = () => {
   //   </div>
   // ))}
 
-  console.log(typeProducts)
+  // console.log(typeProducts)
 
   return (
     <div>
