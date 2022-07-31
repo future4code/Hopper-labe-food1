@@ -6,7 +6,7 @@ import { signUp } from '../../services/user'
 import {Button, OutlinedInput, IconButton, InputAdornment, FormControl, Typography, InputLabel, TextField, CircularProgress} from '@mui/material/'
 import {Visibility, VisibilityOff } from '@mui/icons-material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { FlexForm } from './styled'
+import { FlexForm } from "./styled";
 import Logo from '../../assets/logo-laranja.svg'
 import { LogoImage, PageContainer } from '../LoginPage/styled'
 import useUnProtectedPage from './../../hooks/useUnProtectedPage';

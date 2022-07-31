@@ -15,6 +15,7 @@ export const goToHome = navigate => {
 }
 
 export const goToRestaurant = (navigate, id) => {
+  console.log(id)
   navigate(`/restaurante/${id}`)
 }
 
