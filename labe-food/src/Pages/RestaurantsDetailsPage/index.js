@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 import CardProduct from '../../Components/CardProduct'
 import CardRestaurantDetail from '../../Components/CardRestaurantDetail'
-import { useGetRest } from '../../hooks/useGetRest'
-import { TelaRestaurante, NomeCategoria, HeaderResDetail } from './styled'
-import { BASE_URL } from '../../constants/url'
+import { TelaRestaurante, NomeCategoria } from './styled'
 import useProtectedPage from './../../hooks/useProtectedPage';
-import { Typography } from '@mui/material'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import { useRestaurantsDetail } from '../../services/restaurantsDetail'
 
 
-const RestaurantsDetailsPage = (props) => {
+const RestaurantsDetailsPage = () => {
   useProtectedPage();
   // const navigate = useNavigate();
   const {id} = useParams();
-  const [infoRestauranteId] = useRestaurantsDetail("2");
-  console.log(infoRestauranteId)
-  // console.log(menu)
+  const [infoRestauranteId] = useRestaurantsDetail(id);
+  // console.log(infoRestauranteId)
 
-  // abioxo lógica para pegar informações dos pratos.
   const typeProducts =infoRestauranteId.products && infoRestauranteId.products.map(food => {
     return food
   }).reduce((acc, food) => {
