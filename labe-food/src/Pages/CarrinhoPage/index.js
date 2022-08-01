@@ -17,7 +17,7 @@ import Footer from '../../Components/Footer'
 const CarrinhoPage = () => {
   const navigate = useNavigate()
   const { states, setters } = useContext(GlobalStateContext)
-  const {id} = useParams()
+  const { id } = useParams()
 
   return (
     <TelaCarrinho>
@@ -64,7 +64,7 @@ const CarrinhoPage = () => {
           color={'primary'}
           margin={'normal'}
           onClick={() => navigate('/home')}
-          sx={{marginBottom:'0'}}
+          sx={{ marginBottom: '0' }}
         >
           Confirmar
         </Button>

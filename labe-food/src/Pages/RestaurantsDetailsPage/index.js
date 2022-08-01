@@ -7,16 +7,14 @@ import useProtectedPage from './../../hooks/useProtectedPage'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import { useRestaurantsDetail } from '../../services/restaurantsDetail'
-import { useContext } from 'react'
 import { GlobalStateContext } from './../../global/GlobalStateContatex'
+import { useContext } from 'react'
 
 const RestaurantsDetailsPage = () => {
   useProtectedPage()
-  // const navigate = useNavigate();
   const { id } = useParams()
   const [infoRestauranteId] = useRestaurantsDetail(id)
-
-  const { functions, states, setters } = useContext(GlobalStateContext)
+  const { states, setters } = useContext(GlobalStateContext)
 
   const typeProducts =
     infoRestauranteId.products &&
@@ -32,6 +30,42 @@ const RestaurantsDetailsPage = () => {
         return acc
       }, [])
 
+  // Função Adicionar produto ao carrinho
+  const addProduct = (product, restaurantId) => {
+    const index = states.cart.findIndex(cartProduct => {
+      if (cartProduct.id === product.id) {
+        return true
+      } else {
+        return false
+      }
+    })
+
+    if (index === -1) {
+      const setProduct = {
+        ...product,
+        quantity: 1
+      }
+      const newCart = [...states.cart, setProduct]
+      setters.setCart(newCart)
+      // Setando alert na tela
+      alert('Produto adicionado ao carrinho')
+    } else {
+      const newCart = states.cart.map(cartProduct => {
+        if (cartProduct.id === product.id) {
+          return {
+            ...cartProduct,
+            quantity: cartProduct.quantity + 1
+          }
+        } else {
+          return cartProduct
+        }
+      })
+      setters.setCart(newCart)
+      alert('Produto adicionado ao carrinho')
+    }
+
+    localStorage.setItem('restaurantId', restaurantId)
+  }
 
   return (
     <div>
@@ -54,7 +88,8 @@ const RestaurantsDetailsPage = () => {
                 <CardProduct
                   restaurant={infoRestauranteId}
                   product={products}
-                  addProduct={functions.addProduct}
+                  addProduct={addProduct}
+                  quantity={products.quantity}
                   photoUrl={products.photoUrl}
                   key={products.id}
                   src={products.photoUrl}

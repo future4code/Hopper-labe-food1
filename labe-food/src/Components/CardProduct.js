@@ -6,6 +6,9 @@ import CardMedia from '@mui/material/CardMedia'
 
 import Typography from '@mui/material/Typography'
 
+import { GlobalStateContext } from '../global/GlobalStateContatex'
+import { useContext } from 'react'
+
 import {
   BotaoAdd,
   BotaoQtd,
@@ -13,6 +16,84 @@ import {
 } from '../Pages/RestaurantsDetailsPage/styled'
 
 const CardProduct = props => {
+  const { states, setters } = useContext(GlobalStateContext)
+  // Função Adicionar produto ao carrinho
+  const addProduct = (product, restaurantId) => {
+    const index = states.cart.findIndex(cartProduct => {
+      if (cartProduct.id === product.id) {
+        return true
+      } else {
+        return false
+      }
+    })
+
+    if (index === -1) {
+      const setProduct = {
+        ...product,
+        quantity: 1
+      }
+      const newCart = [...states.cart, setProduct]
+      setters.setCart(newCart)
+      // Setando alert na tela
+      alert('Produto adicionado ao carrinho')
+    } else {
+      const newCart = states.cart.map(cartProduct => {
+        if (cartProduct.id === product.id) {
+          return {
+            ...cartProduct,
+            quantity: cartProduct.quantity + 1
+          }
+        } else {
+          return cartProduct
+        }
+      })
+      setters.setCart(newCart)
+      alert('Produto adicionado ao carrinho')
+    }
+
+    localStorage.setItem('restaurantId', restaurantId)
+  }
+
+  const addMoreProduct = product => {
+    const newCart = states.cart.map(cartProduct => {
+      if (cartProduct.id === product.id) {
+        return {
+          ...cartProduct,
+          quantity: cartProduct.quantity + 1
+        }
+      } else {
+        return cartProduct
+      }
+    })
+
+    setters.setCart(newCart)
+  }
+
+  // Função remover um produto do carrinho
+  const removeMoreProduct = product => {
+    const newCart = states.cart
+      .map(cartProduct => {
+        if (cartProduct.id === product.id) {
+          return {
+            ...cartProduct,
+            quantity: cartProduct.quantity - 1
+          }
+        } else {
+          return cartProduct
+        }
+      })
+
+      .filter(cartProduct => {
+        if (cartProduct.quantity < 1) {
+          return false
+        } else {
+          return true
+        }
+      })
+
+    setters.setCart(newCart)
+  }
+
   return (
     <Card
       sx={{
@@ -27,7 +108,6 @@ const CardProduct = props => {
       <CardMedia
         component="img"
         sx={{ width: 97 }}
-        // image="https://www.sabornamesa.com.br/media/k2/items/cache/b9ad772005653afce4d4bd46c2efe842_XL.jpg"
         src={props.photoUrl}
         alt="Live from space album cover"
       />
@@ -52,7 +132,13 @@ const CardProduct = props => {
             {props.name}
           </Typography>
 
-          <BotaoQtd>2</BotaoQtd>
+          <BotaoQtd onClick={() => addMoreProduct(props.product.quantity)}>
+            +
+          </BotaoQtd>
+          <p>0</p>
+          <BotaoQtd onClick={() => addMoreProduct(props.product.quantity)}>
+            -
+          </BotaoQtd>
         </BoxNomeQtd>
 
         <div>
@@ -78,7 +164,7 @@ const CardProduct = props => {
             <BotaoAdd
               key={props.id}
               onClick={() =>
-                props.addProduct(props.product, props.restaurant, 1)
+                addProduct(props.product, props.restaurant, props.id)
               }
             >
               adicionar
