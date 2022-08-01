@@ -15,8 +15,8 @@ const RestaurantsDetailsPage = () => {
   // const navigate = useNavigate();
   const { id } = useParams()
   const [infoRestauranteId] = useRestaurantsDetail(id)
-  // console.log(infoRestauranteId)
-  const { functions } = useContext(GlobalStateContext)
+
+  const { functions, states, setters } = useContext(GlobalStateContext)
 
   const typeProducts =
     infoRestauranteId.products &&
@@ -32,31 +32,6 @@ const RestaurantsDetailsPage = () => {
         return acc
       }, [])
 
-  // {typeProducts && Object.entries(typeProducts).map((type, i) => (
-  //   <div key={i}>
-  //     <Title>{type[0]}</Title>
-  //     {type[1].map(products => (
-  //       <Products key={products.id}>
-  //         <Image>
-  //           <img src={products.photoUrl} alt={Imagem ilustrativa do ${products.name}} />
-  //         </Image>
-  //         <Texts>
-  //           <Item>
-  //             <p>{products.name}</p>
-  //             <button>2</button>
-  //           </Item>
-  //           <p>{products.description}</p>
-  //           <CardShopping
-  //             products={products}
-  //             restaurant={data.restaurant}
-  //           />
-  //         </Texts>
-  //       </Products>
-  //     ))}
-  //   </div>
-  // ))}
-
-  // console.log(typeProducts)
 
   return (
     <div>

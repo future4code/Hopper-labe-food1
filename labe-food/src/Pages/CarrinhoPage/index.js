@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   TelaCarrinho,
   NomePg,
@@ -12,16 +12,17 @@ import Button from '@mui/material/Button'
 import { GlobalStateContext } from './../../global/GlobalStateContatex'
 import { useContext } from 'react'
 import CardProduct from '../../Components/CardProduct'
+import Footer from '../../Components/Footer'
 
 const CarrinhoPage = () => {
   const navigate = useNavigate()
   const { states, setters } = useContext(GlobalStateContext)
+  const {id} = useParams()
 
   return (
     <TelaCarrinho>
       <NomePg>Meu Carrinho</NomePg>
-      <button onClick={() => navigate('/perfil')}>Ver Perfil</button>
-      <button onClick={() => navigate('/restaurante')}>
+      <button onClick={() => navigate(`/restaurante`)}>
         Continuar Comprando
       </button>
 
@@ -35,7 +36,6 @@ const CarrinhoPage = () => {
           price={products.price}
         />
       ))}
-
       <SessaoPg>
         <main>
           <h3>Frete</h3>
@@ -64,10 +64,13 @@ const CarrinhoPage = () => {
           color={'primary'}
           margin={'normal'}
           onClick={() => navigate('/home')}
+          sx={{marginBottom:'0'}}
         >
           Confirmar
         </Button>
       </SessaoPg>
+
+      <Footer />
     </TelaCarrinho>
   )
 }
