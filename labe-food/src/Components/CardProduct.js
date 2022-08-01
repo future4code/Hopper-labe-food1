@@ -12,7 +12,7 @@ import {
   BoxNomeQtd
 } from '../Pages/RestaurantsDetailsPage/styled'
 
-const CardProduct = (props) => {
+const CardProduct = props => {
   return (
     <Card
       sx={{
@@ -74,10 +74,16 @@ const CardProduct = (props) => {
             R$:{props.price.toFixed(2).replace('.', ',')}
           </Typography>
 
-          <BotaoAdd
-          
-            key={props.id} 
-          >adicionar</BotaoAdd>
+          {props.product ? (
+            <BotaoAdd
+              key={props.id}
+              onClick={() =>
+                props.addProduct(props.product, props.restaurant, 1)
+              }
+            >
+              adicionar
+            </BotaoAdd>
+          ) : null}
         </BoxNomeQtd>
       </Box>
     </Card>

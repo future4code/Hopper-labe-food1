@@ -3,28 +3,34 @@ import { useParams } from 'react-router-dom'
 import CardProduct from '../../Components/CardProduct'
 import CardRestaurantDetail from '../../Components/CardRestaurantDetail'
 import { TelaRestaurante, NomeCategoria } from './styled'
-import useProtectedPage from './../../hooks/useProtectedPage';
+import useProtectedPage from './../../hooks/useProtectedPage'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import { useRestaurantsDetail } from '../../services/restaurantsDetail'
-
+import { useContext } from 'react'
+import { GlobalStateContext } from './../../global/GlobalStateContatex'
 
 const RestaurantsDetailsPage = () => {
-  useProtectedPage();
+  useProtectedPage()
   // const navigate = useNavigate();
-  const {id} = useParams();
-  const [infoRestauranteId] = useRestaurantsDetail(id);
+  const { id } = useParams()
+  const [infoRestauranteId] = useRestaurantsDetail(id)
   // console.log(infoRestauranteId)
+  const { functions } = useContext(GlobalStateContext)
 
-  const typeProducts =infoRestauranteId.products && infoRestauranteId.products.map(food => {
-    return food
-  }).reduce((acc, food) => {
-    if (!acc[food.category]) {
-      acc[food.category] = []
-    }
-    acc[food.category].push(food)
-    return acc
-  }, [])
+  const typeProducts =
+    infoRestauranteId.products &&
+    infoRestauranteId.products
+      .map(food => {
+        return food
+      })
+      .reduce((acc, food) => {
+        if (!acc[food.category]) {
+          acc[food.category] = []
+        }
+        acc[food.category].push(food)
+        return acc
+      }, [])
 
   // {typeProducts && Object.entries(typeProducts).map((type, i) => (
   //   <div key={i}>
@@ -40,7 +46,7 @@ const RestaurantsDetailsPage = () => {
   //             <button>2</button>
   //           </Item>
   //           <p>{products.description}</p>
-  //           <CardShopping 
+  //           <CardShopping
   //             products={products}
   //             restaurant={data.restaurant}
   //           />
@@ -56,33 +62,34 @@ const RestaurantsDetailsPage = () => {
     <div>
       <Header />
       <TelaRestaurante>
-            <CardRestaurantDetail
-              logoUrl={infoRestauranteId.logoUrl}
-              name={infoRestauranteId.name}
-              shipping={infoRestauranteId.shipping}
-              deliveryTime={infoRestauranteId.deliveryTime}
-              address={infoRestauranteId.address}
-              category={infoRestauranteId.category}
-            />
+        <CardRestaurantDetail
+          logoUrl={infoRestauranteId.logoUrl}
+          name={infoRestauranteId.name}
+          shipping={infoRestauranteId.shipping}
+          deliveryTime={infoRestauranteId.deliveryTime}
+          address={infoRestauranteId.address}
+          category={infoRestauranteId.category}
+        />
 
-
-            {typeProducts && Object.entries(typeProducts).map((type, i) => (               
-              <div key={i}>
-                  <NomeCategoria>{type[0]}</NomeCategoria> 
-                    {type[1].map(products => (
-                      <CardProduct 
-                      
-                        photoUrl={products.photoUrl}
-                        key={products.id}
-                        src={products.photoUrl}
-                        name={products.name}
-                        description={products.description}
-                        price={products.price}
-                      />
-                      ))}
-              </div>
-            ))}
-
+        {typeProducts &&
+          Object.entries(typeProducts).map((type, i) => (
+            <div key={i}>
+              <NomeCategoria>{type[0]}</NomeCategoria>
+              {type[1].map(products => (
+                <CardProduct
+                  restaurant={infoRestauranteId}
+                  product={products}
+                  addProduct={functions.addProduct}
+                  photoUrl={products.photoUrl}
+                  key={products.id}
+                  src={products.photoUrl}
+                  name={products.name}
+                  description={products.description}
+                  price={products.price}
+                />
+              ))}
+            </div>
+          ))}
       </TelaRestaurante>
       <Footer />
     </div>
