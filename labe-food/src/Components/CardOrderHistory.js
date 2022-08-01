@@ -1,5 +1,6 @@
 import Typography from '@mui/material/Typography'
 import React from 'react'
+import { BoxHistory } from '../Pages/ProfilePage/styled'
 
 const CardOrderHistory = props => {
   const dateConverter = date => {
@@ -9,17 +10,17 @@ const CardOrderHistory = props => {
 
   const historyMap = props.orderHistory.map(order => {
     return (
-      <div key={order.createdAt}>
-        <Typography variant={'body1'} color={'primary'}>
+      <BoxHistory key={order.createdAt}>
+        <Typography variant={'h6'} color={'primary'} sx={{margin:'3px 0'}}>
           {order.restaurantName}
         </Typography>
-        <Typography variant={'body2'}>
+        <Typography variant={'body2'} sx={{margin:'3px 0'}}>
           {dateConverter(order.createdAt)}
         </Typography>
-        <Typography variant={'h6'}>
+        <Typography variant={'h6'} sx={{margin:'3px 0', fontWeight:'bold'}}>
           SUBTOTAL R$ {order.totalPrice.toFixed(2).replace('.', ',')}
         </Typography>
-      </div>
+      </BoxHistory>
     )
   })
 

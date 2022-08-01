@@ -68,3 +68,12 @@ export const CheckPg = styled.input`
         opacity: 1;
     }
 `
+
+export const StyledAddress = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4.75rem;
+    padding: 0 1rem;
+    background-color: #eeeeee;
+`

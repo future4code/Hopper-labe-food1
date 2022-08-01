@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../../Components/Footer'
-import { StyleDetail, StyledAddress } from './styled'
+import { StyleDetail, StyledAddress, NomeApp } from './styled'
 import CircularProgress from '@mui/material/CircularProgress'
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined'
 import { getFullAddress } from './../../services/user'
@@ -37,6 +37,7 @@ const ProfilePage = () => {
 
   return (
     <PageContainer>
+      <NomeApp>Rappi4</NomeApp>
       <button onClick={() => onClickLogout(navigate)}>Logout</button>
 
       <button onClick={() => navigate('/home')}>Voltar pra Home</button>
